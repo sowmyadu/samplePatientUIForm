@@ -1,0 +1,155 @@
+<div class="col-lg-6 offset-lg-3">
+  <h4>Patient Details</h4>
+  <hr/>
+</div>
+<form [formGroup]="saveForm" class="form mb-5 pb-3">
+  <div class="col-lg-6 offset-lg-3">
+    <div class="form-group row mb-0">
+      <label class="required col-lg-2 my-auto py-lg-2 pt-2 pb-0" for="name">Patient Name</label>
+      <div class="col-lg-1 my-lg-0 py-lg-2 pt-0">
+        <mat-form-field class="gender">
+          <mat-label></mat-label>
+          <mat-select [(value)]="genderSelected">
+            <mat-option value="Male">Mr.</mat-option>
+            <mat-option value="Female">Ms.</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-lg-3 my-lg-0 py-lg-2 pt-0">
+        <input type="text" id="name" name="name" class="form-control" formControlName="name"/>
+      </div>
+      <label class="required col-lg-1 my-auto py-lg-2 pt-2 pb-0" id="example-radio-group-label">Gender</label>
+      <div class="col-lg-4 my-auto py-lg-2 mx-4 pt-0">
+<!--        <mat-radio-group-->
+<!--              aria-labelledby="example-radio-group-label"-->
+<!--              class="example-radio-group"-->
+<!--              [(ngModel)]="genderModel" [ngModelOptions]="{standalone: true}">-->
+<!--        <mat-radio-button class="example-radio-button" *ngFor="let gender of genders" [value]="gender" [name]="gender">-->
+<!--          {{gender}}-->
+<!--        </mat-radio-button>-->
+<!--      </mat-radio-group>-->
+        <mat-radio-group aria-label="Select an option" [value]="genderSelected">
+          <mat-radio-button value="Male">Male</mat-radio-button>
+          <mat-radio-button value="Female">Female</mat-radio-button>
+        </mat-radio-group>
+      </div>
+    </div>
+
+    <div class="form-group row mb-0">
+      <label class="col-lg-2 col-form-label my-auto py-lg-2 pt-3 pb-0">DOB </label>
+      <div class="col-lg-3 my-0 py-lg-2 col-6 pt-0">
+<!--        <input type="text" id="dob" name="dob" class="form-control" formControlName="dob"/>-->
+        <mat-form-field appearance="fill">
+          <mat-label>DOB</mat-label>
+          <input matInput [matDatepicker]="dob" formControlName="dob" [max]="minAppt" (ngModelChange)='getAge()'>
+          <mat-datepicker-toggle matSuffix [for]="dob"></mat-datepicker-toggle>
+          <mat-datepicker #dob></mat-datepicker>
+        </mat-form-field>
+
+      </div>
+      <div class="col-lg-1"></div>
+      <label for="age" class="col-lg-2 col-form-label my-auto py-lg-2 pt-3 pb-0">Age </label>
+      <div class="col-lg-4 my-auto py-lg-2 col-6 pt-0">
+        <input type=number id="age" name="age" class="form-control" formControlName="age" [value]="calculatedAge" placeholder="Years"/>
+      </div>
+    </div>
+
+    <div class="form-group row mb-0">
+      <label class="col-lg-2 col-form-label my-auto py-lg-2 pt-3 pb-0">Appointment Date</label>
+      <div class="col-lg-4 my-auto py-lg-2 col-6 pt-0">
+        <!--        <input type="text" id="dob" name="dob" class="form-control" formControlName="dob"/>-->
+        <mat-form-field appearance="fill">
+          <mat-label>Appointment</mat-label>
+          <input matInput [matDatepicker]="appointment" [min]="minAppt" formControlName="appointment">
+          <mat-datepicker-toggle matSuffix [for]="appointment"></mat-datepicker-toggle>
+          <mat-datepicker #appointment></mat-datepicker>
+        </mat-form-field>
+
+      </div>
+      <label for="phone" class="col-lg-2 col-form-label my-auto py-lg-2 pt-3 pb-0">Phone Number </label>
+      <div class="col-lg-4 my-auto py-lg-2 col-6 pt-0">
+        <input type=number id="phone" name="phone" class="form-control" formControlName="phone"/>
+      </div>
+    </div>
+
+    <div class="form-group row mb-0">
+      <label class="required col-lg-2 my-auto py-lg-2 pt-2 pb-0" for="address1">Address</label>
+      <div class="col-lg-10 my-lg-0 py-lg-2 pt-0">
+        <input type="text" id="address1" name="address1" class="form-control" formControlName="address1" placeholder="Street Address"/>
+      </div>
+      <div class="required col-lg-2 my-auto py-lg-2 pt-2 pb-0"></div>
+      <div class="col-lg-10 my-lg-0 py-lg-2 pt-0">
+        <input type="text" id="address2" name="address2" class="form-control" formControlName="address2" placeholder="Street Address 2"/>
+      </div>
+      <div class="required col-lg-2 my-auto py-lg-2 pt-2 pb-0"></div>
+      <div class="col-lg-5 my-lg-0 py-lg-2 pt-0">
+        <input type="text" id="city" name="city" class="form-control" formControlName="city" placeholder="City"/>
+      </div>
+      <div class="col-lg-5 my-lg-0 py-lg-2 pt-0">
+        <input type="text" id="address_state" name="address_state" class="form-control" formControlName="address_state" placeholder="State/Province"/>
+      </div>
+      <div class="required col-lg-2 my-auto py-lg-2 pt-2 pb-0"></div>
+      <div class="col-lg-5 my-lg-0 py-lg-2 pt-0">
+        <input type="text" id="postal" name="postal" class="form-control" formControlName="postal" placeholder="Postal/Zip Code"/>
+      </div>
+      <div class="col-lg-5 my-lg-0 py-lg-2 pt-0">
+        <input type="text" id="country" name="country" class="form-control" formControlName="country" placeholder="Country"/>
+      </div>
+    </div>
+  </div>
+</form>
+
+<div class="col-lg-6 offset-lg-3">
+  <h4>Medical Scan Details</h4>
+  <hr/>
+</div>
+
+<form [formGroup]="saveFormTest" class="form mb-5 pb-3">
+  <div class="col-lg-8 offset-lg-2">
+    <div class="form-group row mb-0">
+      <label class="required col-lg-1 my-auto py-lg-2 pt-2 pb-0" for="name">Medical Scan</label>
+      <div class="col-lg-3 my-lg-0 py-lg-2 pt-0">
+        <mat-form-field appearance="fill">
+          <mat-label>Choose a scan</mat-label>
+          <mat-select [(ngModel)]="scan" (selectionChange)="showAmount(scan)" [ngModelOptions]="{standalone: true}">
+            <mat-option *ngFor="let scan of scans" [value]="scan">
+              {{scan.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <label class="required col-lg-2 my-auto py-lg-2 pt-2 pb-0" id="scan_amount">Scan Amount {{scan_amount}}</label>
+      <label class="required col-lg-1 my-auto py-lg-2 pt-2 pb-0" for="name">Discount</label>
+      <div class="col-lg-2 my-auto py-lg-2 pt-0">
+        <input type="text" id="discount" name="discount" [(ngModel)]="disc" [ngModelOptions]="{standalone: true}"/>
+      </div>
+      <div class="col-lg-2 my-auto py-lg-2 pt-0">
+      <button name="Add" id="submit" value="Add" class="btn btn-primary float-lg-right" (click)="addOrder()">Add
+      </button></div>
+    </div>
+  </div>
+
+  <table class="col-lg-6 offset-lg-3 table-striped" formArrayName="orders">
+    <tr>
+      <th>S.no</th>
+      <th>Scan name</th>
+      <th>Scan Amount</th>
+      <th>Discount</th>
+      <th>Total Amount</th>
+    </tr>
+    <tr *ngFor="let order of orders().value; let i=index" [formGroupName]="i">
+      <td>{{i+1}}</td>
+      <td>{{order.medical_scan.name}}</td>
+      <td>{{order.medical_scan.amount}}</td>
+      <td>{{order.discount}}</td>
+      <td>{{order.medical_scan.amount - order.discount}}</td>
+      <td><button (click)="removeOrder(i)" class="btn btn-danger">Remove</button></td>
+    </tr>
+  </table>
+</form>
+
+<div class="col-lg-3 offset-lg-6">
+  <button name="Save" id="save" value="Add" class="btn btn-primary" (click)="saveFormDetails()">Save</button>
+</div>
+
+
